@@ -20,4 +20,9 @@ public class UserService {
     public Page<UserEntity> getAllUsers(Pageable pageable) {
      return this.userRepository.findAll(pageable);
     }
+
+    public Page<UserEntity> getAllUsers(Pageable pageable, String search) {
+        return this.userRepository.getAllUserAndFilter(search,pageable);
+    }
+
 }
