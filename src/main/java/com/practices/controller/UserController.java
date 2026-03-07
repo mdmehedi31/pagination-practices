@@ -1,6 +1,7 @@
 package com.practices.controller;
 
 
+import com.practices.dto.UserDTO;
 import com.practices.entity.UserEntity;
 import com.practices.services.UserService;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class UserController {
 
 
     @PostMapping("/get-all-users-filter")
-    public ResponseEntity<Page<UserEntity>> getAllUsers(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
+    public ResponseEntity<Page<UserDTO>> getAllUsers(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
                                                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                         @RequestParam(value = "sort", defaultValue = "id")  String sortColumn,
                                                         @RequestParam(value = "search", required = false) String search ) {
@@ -60,7 +61,7 @@ public class UserController {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         log.info("Pageable value is : {}, search criteria : {}", pageable, search);
-        Page<UserEntity> users = userService.getAllUsers(pageable,search);
+        Page<UserDTO> users = userService.getAllUsers(pageable,search);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
