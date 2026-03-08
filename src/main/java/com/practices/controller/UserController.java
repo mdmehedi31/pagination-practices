@@ -4,6 +4,7 @@ package com.practices.controller;
 import com.practices.dto.UserDTO;
 import com.practices.entity.UserEntity;
 import com.practices.services.UserService;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -49,8 +50,11 @@ public class UserController {
 
 
     @PostMapping("/get-all-users-filter")
-    public ResponseEntity<Page<UserDTO>> getAllUsers(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
-                                                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+    public ResponseEntity<Page<UserDTO>> getAllUsers(
+            @PositiveOrZero
+            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
+
+                                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                         @RequestParam(value = "sort", defaultValue = "id")  String sortColumn,
                                                         @RequestParam(value = "search", required = false) String search ) {
 
